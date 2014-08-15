@@ -21,8 +21,7 @@ defmodule Fetch do
   end
 
   defp do_getValue(results) do
-    [[source, value]] = results
-    value
+    List.flatten(results) |> tl()
   end
 
   defp getValues(results, acc) when results == [] do
@@ -44,19 +43,6 @@ defmodule Fetch do
     [[source, elementLine]] = result
     [[source, attribute]] = Regex.scan(~r/#{attribute}="(.*?)"/, elementLine)
     attribute
-  end
-
-  def getListLength(list) do
-    do_getListLength(list, 0)
-  end
-
-  defp do_getListLength(list, acc) when list == [] do
-    acc
-  end
-
-  defp do_getListLength(list, acc) do
-    newList = tl(list)
-    do_getListLength(newList, acc + 1)
   end
 
 end

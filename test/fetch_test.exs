@@ -10,7 +10,7 @@ defmodule FetchTest do
   end
 
   test "gets value of software" do
-    assert Fetch.getValue("<software>MuseScore 1.3</software>", "software") == "MuseScore 1.3"
+    assert Fetch.getValue("<software>MuseScore 1.3</software>", "software") == ["MuseScore 1.3"]
   end
 
   test "gets value of two notes" do
