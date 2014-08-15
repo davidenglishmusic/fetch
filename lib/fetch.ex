@@ -15,5 +15,11 @@ defmodule Fetch do
     [[source, value]] = Regex.scan(~r/<#{element}>(.*?)<\/#{element}>/, fileBody)
     value
   end
-  
+
+  def getAttribute(fileBody, attribute, element) do
+    [[source, elementLine]] = Regex.scan(~r/<#{element}(.*?)>/, fileBody)
+    [[source, attribute]] = Regex.scan(~r/#{attribute}="(.*?)"/, elementLine)
+    attribute
+  end
+
 end
