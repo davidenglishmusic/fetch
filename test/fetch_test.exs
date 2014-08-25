@@ -1,10 +1,6 @@
 defmodule FetchTest do
   use ExUnit.Case
 
-  test "the truth" do
-    assert 1 + 1 == 2
-  end
-
   test "gets the file body" do
     assert Fetch.getFileBody("xml/basic.xml") == "<basic>\n"
   end

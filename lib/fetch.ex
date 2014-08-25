@@ -1,9 +1,5 @@
 defmodule Fetch do
 
-  def fetch(filename) do
-    getFileBody(filename) |> IO.puts()
-  end
-
   def getFileBody(filename) do
     File.open filename
     {:ok, body} = File.read filename
@@ -40,9 +36,8 @@ defmodule Fetch do
   end
 
   defp do_getAttribute(attribute, result) do
-    [[source, elementLine]] = result
-    [[source, attribute]] = Regex.scan(~r/#{attribute}="(.*?)"/, elementLine)
-    attribute
+    elementLine = hd(result) |> tl() |> List.to_string()
+    Regex.scan(~r/#{attribute}="(.*?)"/, elementLine) |> hd() |> tl() |> List.to_string()
   end
 
 end
