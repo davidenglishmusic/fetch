@@ -8,7 +8,7 @@ defmodule Fetch do
   end
 
   def getValue(fileBody, element) do
-    results = Regex.scan(~r/<#{element}.*?>(.*?)<\/#{element}>/, fileBody)
+    results = Regex.scan(~r/<#{element}[.*]>(.*?)<\/#{element}>/, fileBody)
     do_getValue(results)
   end
 
