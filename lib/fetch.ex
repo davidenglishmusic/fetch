@@ -2,7 +2,7 @@ defmodule Fetch do
 
   def getFileBody(filename) do
     File.open filename
-    {:ok, body} = File.read filename
+    body = File.read! filename
     File.close filename
     body
   end
