@@ -4,7 +4,7 @@ defmodule Fetch do
     File.open filename
     body = File.read! filename
     File.close filename
-    body
+    String.replace(body, "\n", "")
   end
 
   def getValue(fileBody, element) do
