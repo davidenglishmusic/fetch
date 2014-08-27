@@ -8,26 +8,17 @@ defmodule Fetch do
   end
 
   def getValue(fileBody, element) do
-    results = Regex.scan(~r/<#{element}.*?>(.*?)<\/#{element}>/, fileBody)
-    do_getValue(results)
+    valuePairs = Regex.scan(~r/<#{element}.*?>(.*?)<\/#{element}>/, fileBody)
+    do_getValue(valuePairs, [])
   end
 
-  defp do_getValue(results) when length(results) >= 2 do
-    getValues(results, [])
-  end
-
-  defp do_getValue(results) do
-    List.flatten(results) |> tl()
-  end
-
-  defp getValues(results, acc) when results == [] do
+  defp do_getValue(valuePairs, acc) when length(valuePairs) == 0 do
     Enum.reverse(acc)
   end
 
-  defp getValues(results, acc) do
-    value = Enum.at(results, 0) |> tl()
-    newAcc = value ++ acc
-    getValues(tl(results), newAcc)
+  defp do_getValue(valuePairs, acc) do
+    newValue = hd(valuePairs) |> tl()
+    do_getValue(tl(valuePairs), newValue ++ acc)
   end
 
   def getAttribute(fileBody, attribute, element) do
